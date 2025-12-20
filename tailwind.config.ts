@@ -59,6 +59,10 @@ export default {
           active: "hsl(var(--sidebar-active))",
           border: "hsl(var(--sidebar-border))",
         },
+        topbar: {
+          DEFAULT: "hsl(var(--topbar-background))",
+          border: "hsl(var(--topbar-border))",
+        },
         glass: {
           DEFAULT: "hsl(var(--glass-bg))",
           border: "hsl(var(--glass-border))",
