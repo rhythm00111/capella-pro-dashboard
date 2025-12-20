@@ -1,11 +1,11 @@
 import {
   LayoutDashboard,
   CheckSquare,
-  Calendar,
-  DollarSign,
+  CalendarDays,
+  Wallet,
   Users,
   FileText,
-  PenTool,
+  Presentation,
   type LucideIcon,
 } from "lucide-react";
 
@@ -29,12 +29,12 @@ export const navigationItems: NavigationItem[] = [
   {
     label: "Calendar",
     href: "/calendar",
-    icon: Calendar,
+    icon: CalendarDays,
   },
   {
     label: "Finance",
     href: "/finance",
-    icon: DollarSign,
+    icon: Wallet,
   },
   {
     label: "Clients",
@@ -49,6 +49,6 @@ export const navigationItems: NavigationItem[] = [
   {
     label: "Whiteboard",
     href: "/whiteboard",
-    icon: PenTool,
+    icon: Presentation,
   },
 ];

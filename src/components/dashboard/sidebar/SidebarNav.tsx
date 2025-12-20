@@ -8,10 +8,10 @@ export function SidebarNav() {
 
   return (
     <nav className={cn(
-      "flex-1 py-6 transition-all duration-300",
+      "flex-1 py-10 transition-all duration-300",
       isCollapsed ? "px-2" : "px-4"
     )}>
-      <div className="space-y-1">
+      <div className="space-y-3">
         {navigationItems.map((item) => (
           <SidebarNavItem
             key={item.href}

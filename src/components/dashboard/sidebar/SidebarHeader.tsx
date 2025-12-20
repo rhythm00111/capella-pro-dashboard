@@ -37,18 +37,18 @@ export function SidebarHeader() {
       {isCollapsed ? (
         /* Collapsed: Show only "C" logo */
         <div className="w-10 h-10 rounded-full bg-zinc-800/50 flex items-center justify-center mx-auto mt-1">
-          <span className="text-white font-semibold text-sm">C</span>
+          <span className="text-white font-bold text-base">C</span>
         </div>
       ) : (
         /* Expanded: Show full header */
         <>
-          <div className="text-[10px] font-semibold tracking-[0.2em] text-zinc-500 uppercase">
+          <div className="text-sm font-bold tracking-[0.25em] text-zinc-400 uppercase mb-10">
             CAPELLA PRO
           </div>
-          <div className="mt-6">
-            <div className="text-sm text-zinc-400 font-normal">{getGreeting()}</div>
-            <div className="text-lg font-medium text-white mt-1">User Name</div>
-            <div className="text-xs text-zinc-500 font-normal mt-0.5">Your Profession</div>
+          <div className="space-y-1.5">
+            <div className="text-sm text-zinc-400">{getGreeting()}</div>
+            <div className="text-2xl font-semibold text-white">User Name</div>
+            <div className="text-sm text-zinc-500">Your Profession</div>
           </div>
         </>
       )}
