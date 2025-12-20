@@ -10,7 +10,7 @@ export function DashboardCanvas({ className, children }: DashboardCanvasProps) {
   return (
     <main
       className={cn(
-        "mt-12 flex min-h-[calc(100vh-3rem)] flex-col",
+        "ml-56 mt-12 flex min-h-[calc(100vh-3rem)] flex-col",
         className
       )}
     >

@@ -18,7 +18,7 @@ export function TopBar({ className }: TopBarProps) {
   return (
     <header
       className={cn(
-        "fixed left-0 right-0 top-0 z-30 flex h-12 items-center justify-between px-5 bg-background/80 backdrop-blur-sm border-b border-border/50",
+        "fixed left-56 right-0 top-0 z-30 flex h-12 items-center justify-between px-5 bg-background/80 backdrop-blur-sm border-b border-border/50",
         className
       )}
     >
