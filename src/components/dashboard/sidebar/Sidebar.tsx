@@ -15,25 +15,29 @@ export function Sidebar({ className }: SidebarProps) {
   return (
     <aside
       className={cn(
-        "fixed left-0 top-0 z-40 flex h-screen w-56 flex-col bg-sidebar border-r border-sidebar-border",
+        "fixed left-0 top-0 z-40 flex h-screen w-56 flex-col bg-sidebar",
         className
       )}
     >
       <SidebarHeader />
       
-      <div className="mx-4 h-px bg-border/50" />
-      
-      <nav className="flex-1 space-y-0.5 px-3 py-4">
-        {navigationItems.map((item) => (
-          <SidebarItem
-            key={item.href}
-            label={item.label}
-            href={item.href}
-            icon={item.icon}
-            isActive={currentPath === item.href || (currentPath === "/" && item.href === "/dashboard")}
-          />
-        ))}
+      {/* Centered navigation */}
+      <nav className="flex flex-1 flex-col justify-center px-3 -mt-12">
+        <div className="space-y-0.5">
+          {navigationItems.map((item) => (
+            <SidebarItem
+              key={item.href}
+              label={item.label}
+              href={item.href}
+              icon={item.icon}
+              isActive={currentPath === item.href || (currentPath === "/" && item.href === "/dashboard")}
+            />
+          ))}
+        </div>
       </nav>
+      
+      {/* Bottom spacer for future use */}
+      <div className="h-16" />
     </aside>
   );
 }

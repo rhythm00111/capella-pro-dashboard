@@ -2,81 +2,86 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Capella Pro Design System - Premium Minimal Dark */
+/* Capella Pro Design System - Premium Carbon Dark */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;600&display=swap');
 
 @layer base {
   :root {
-    --background: 220 16% 7%;
-    --foreground: 220 10% 92%;
+    /* Deep carbon black - premium background system */
+    --background: 225 8% 6%;
+    --foreground: 220 8% 88%;
 
-    --card: 220 14% 9%;
-    --card-foreground: 220 10% 88%;
+    --card: 225 8% 8%;
+    --card-foreground: 220 8% 85%;
 
-    --popover: 220 14% 10%;
-    --popover-foreground: 220 10% 88%;
+    --popover: 225 8% 9%;
+    --popover-foreground: 220 8% 85%;
 
-    --primary: 215 80% 62%;
-    --primary-foreground: 220 16% 7%;
+    --primary: 215 70% 58%;
+    --primary-foreground: 225 8% 6%;
 
-    --secondary: 220 12% 12%;
-    --secondary-foreground: 220 10% 75%;
+    --secondary: 225 6% 11%;
+    --secondary-foreground: 220 8% 70%;
 
-    --muted: 220 12% 14%;
-    --muted-foreground: 220 10% 48%;
+    --muted: 225 6% 13%;
+    --muted-foreground: 220 6% 45%;
 
-    --accent: 220 12% 15%;
-    --accent-foreground: 220 10% 85%;
+    --accent: 225 6% 14%;
+    --accent-foreground: 220 8% 80%;
 
-    --destructive: 0 55% 55%;
-    --destructive-foreground: 220 10% 92%;
+    --destructive: 0 50% 50%;
+    --destructive-foreground: 220 8% 92%;
 
-    --border: 220 12% 14%;
-    --input: 220 12% 12%;
-    --ring: 215 80% 62%;
+    --border: 225 6% 12%;
+    --input: 225 6% 10%;
+    --ring: 215 70% 58%;
 
     --radius: 0.5rem;
 
-    /* Refined glass tokens - subtle */
-    --glass-bg: 220 20% 100% / 0.02;
-    --glass-border: 220 20% 100% / 0.06;
-    --glass-hover: 220 20% 100% / 0.04;
-    --glass-active: 220 20% 100% / 0.06;
+    /* Glass tokens - ultra subtle */
+    --glass-bg: 220 20% 100% / 0.015;
+    --glass-border: 220 20% 100% / 0.04;
+    --glass-hover: 220 20% 100% / 0.03;
+    --glass-active: 220 20% 100% / 0.05;
 
-    /* Sidebar - nearly invisible */
-    --sidebar-background: 220 16% 8%;
-    --sidebar-foreground: 220 10% 55%;
-    --sidebar-foreground-active: 220 10% 92%;
-    --sidebar-primary: 215 80% 62%;
-    --sidebar-hover: 220 12% 100% / 0.03;
-    --sidebar-active: 220 12% 100% / 0.05;
-    --sidebar-border: 220 12% 12%;
+    /* Sidebar - slightly lighter than main bg */
+    --sidebar-background: 225 8% 7%;
+    --sidebar-foreground: 220 6% 50%;
+    --sidebar-foreground-active: 220 8% 92%;
+    --sidebar-primary: 215 70% 58%;
+    --sidebar-hover: 220 12% 100% / 0.025;
+    --sidebar-active: 220 12% 100% / 0.04;
+    --sidebar-border: 225 6% 10%;
+
+    /* Topbar - slightly lighter than sidebar */
+    --topbar-background: 225 8% 7%;
+    --topbar-border: 225 6% 10%;
 
     /* Typography */
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 
   .dark {
-    --background: 220 16% 7%;
-    --foreground: 220 10% 92%;
-    --card: 220 14% 9%;
-    --card-foreground: 220 10% 88%;
-    --popover: 220 14% 10%;
-    --popover-foreground: 220 10% 88%;
-    --primary: 215 80% 62%;
-    --primary-foreground: 220 16% 7%;
-    --secondary: 220 12% 12%;
-    --secondary-foreground: 220 10% 75%;
-    --muted: 220 12% 14%;
-    --muted-foreground: 220 10% 48%;
-    --accent: 220 12% 15%;
-    --accent-foreground: 220 10% 85%;
-    --destructive: 0 55% 55%;
-    --destructive-foreground: 220 10% 92%;
-    --border: 220 12% 14%;
-    --input: 220 12% 12%;
-    --ring: 215 80% 62%;
+    --background: 225 8% 6%;
+    --foreground: 220 8% 88%;
+    --card: 225 8% 8%;
+    --card-foreground: 220 8% 85%;
+    --popover: 225 8% 9%;
+    --popover-foreground: 220 8% 85%;
+    --primary: 215 70% 58%;
+    --primary-foreground: 225 8% 6%;
+    --secondary: 225 6% 11%;
+    --secondary-foreground: 220 8% 70%;
+    --muted: 225 6% 13%;
+    --muted-foreground: 220 6% 45%;
+    --accent: 225 6% 14%;
+    --accent-foreground: 220 8% 80%;
+    --destructive: 0 50% 50%;
+    --destructive-foreground: 220 8% 92%;
+    --border: 225 6% 12%;
+    --input: 225 6% 10%;
+    --ring: 215 70% 58%;
   }
 }
 
@@ -100,8 +105,15 @@
 
 @layer components {
   .glass-subtle {
-    @apply backdrop-blur-sm border;
+    @apply backdrop-blur-md;
     background: hsl(var(--glass-bg));
-    border-color: hsl(var(--glass-border));
+    border: 1px solid hsl(var(--glass-border));
+  }
+
+  .glass-popup {
+    @apply backdrop-blur-xl;
+    background: hsl(225 8% 10% / 0.95);
+    border: 1px solid hsl(var(--glass-border));
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   }
 }
