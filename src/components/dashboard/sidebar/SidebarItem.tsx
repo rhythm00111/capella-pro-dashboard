@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { glassButton, glassActive } from "@/styles/glass";
 import type { LucideIcon } from "lucide-react";
 
 interface SidebarItemProps {
@@ -14,15 +13,17 @@ export function SidebarItem({ label, href, icon: Icon, isActive = false }: Sideb
     <a
       href={href}
       className={cn(
-        glassButton,
-        "flex items-center gap-3 px-4 py-3 text-sm font-medium",
-        "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "group relative flex items-center gap-3 px-3 py-2 text-[13px] font-normal rounded-md transition-colors duration-150",
+        "focus:outline-none focus-visible:ring-1 focus-visible:ring-ring",
         isActive
-          ? cn(glassActive, "text-foreground")
-          : "text-muted-foreground hover:text-foreground"
+          ? "text-sidebar-foreground-active bg-sidebar-active"
+          : "text-sidebar-foreground hover:text-sidebar-foreground-active hover:bg-sidebar-hover"
       )}
     >
-      <Icon className="h-5 w-5 shrink-0" />
+      {isActive && (
+        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-4 bg-primary rounded-full" />
+      )}
+      <Icon className="h-4 w-4 shrink-0 opacity-70" />
       <span>{label}</span>
     </a>
   );
