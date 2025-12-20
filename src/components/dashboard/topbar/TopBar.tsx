@@ -9,9 +9,10 @@ import { CalendarButton } from "./calendar/CalendarButton";
 
 interface TopBarProps {
   className?: string;
+  isCollapsed?: boolean;
 }
 
-export function TopBar({ className }: TopBarProps) {
+export function TopBar({ className, isCollapsed }: TopBarProps) {
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
 
   const iconButtonClass = cn(
@@ -24,7 +25,10 @@ export function TopBar({ className }: TopBarProps) {
     <>
       <header
         className={cn(
-          "fixed left-56 right-0 top-0 z-30 flex h-11 items-center justify-between px-4 bg-topbar-background/80 backdrop-blur-sm border-b border-topbar-border/50",
+          "fixed right-0 top-0 z-30 flex h-11 items-center justify-between px-4",
+          "bg-background/80 backdrop-blur-sm border-b border-zinc-800/30",
+          "transition-all duration-300 ease-in-out",
+          isCollapsed ? "left-20" : "left-72",
           className
         )}
       >

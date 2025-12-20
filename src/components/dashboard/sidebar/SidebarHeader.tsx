@@ -1,30 +1,57 @@
-interface SidebarHeaderProps {
-  userName?: string;
-  userProfession?: string;
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useSidebarContext } from "./SidebarContext";
+
+function getGreeting(): string {
+  const hour = new Date().getHours();
+  if (hour < 12) return "Good Morning";
+  if (hour < 17) return "Good Afternoon";
+  return "Good Evening";
 }
 
-export function SidebarHeader({
-  userName = "User Name",
-  userProfession = "Your Profession",
-}: SidebarHeaderProps) {
-  const getGreeting = () => {
-    const hour = new Date().getHours();
-    if (hour < 12) return "Good Morning";
-    if (hour < 18) return "Good Afternoon";
-    return "Good Evening";
-  };
+export function SidebarHeader() {
+  const { isCollapsed, toggleCollapsed } = useSidebarContext();
 
   return (
-    <div className="px-4 py-6">
-      <h1 className="text-[11px] font-medium tracking-[0.15em] text-muted-foreground/70 uppercase">
-        Capella Pro
-      </h1>
-      
-      <div className="mt-5 space-y-0.5">
-        <p className="text-[11px] text-muted-foreground/60">{getGreeting()}</p>
-        <p className="text-[13px] font-normal text-foreground/75 tracking-tight">{userName}</p>
-        <p className="text-[11px] text-muted-foreground/50">{userProfession}</p>
-      </div>
+    <div className={cn(
+      "relative border-b border-zinc-800/30 transition-all duration-300",
+      isCollapsed ? "px-3 py-6" : "px-6 py-8"
+    )}>
+      {/* Collapse/Uncollapse Button */}
+      <button
+        onClick={toggleCollapsed}
+        className={cn(
+          "absolute w-7 h-7 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50",
+          "text-zinc-400 hover:text-white transition-all duration-200 active:scale-95",
+          "flex items-center justify-center",
+          isCollapsed ? "top-5 right-2" : "top-6 right-4"
+        )}
+      >
+        {isCollapsed ? (
+          <ChevronRight className="w-3.5 h-3.5" />
+        ) : (
+          <ChevronLeft className="w-3.5 h-3.5" />
+        )}
+      </button>
+
+      {isCollapsed ? (
+        /* Collapsed: Show only "C" logo */
+        <div className="w-10 h-10 rounded-full bg-zinc-800/50 flex items-center justify-center mx-auto mt-1">
+          <span className="text-white font-semibold text-sm">C</span>
+        </div>
+      ) : (
+        /* Expanded: Show full header */
+        <>
+          <div className="text-[10px] font-semibold tracking-[0.2em] text-zinc-500 uppercase">
+            CAPELLA PRO
+          </div>
+          <div className="mt-6">
+            <div className="text-sm text-zinc-400 font-normal">{getGreeting()}</div>
+            <div className="text-lg font-medium text-white mt-1">User Name</div>
+            <div className="text-xs text-zinc-500 font-normal mt-0.5">Your Profession</div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
