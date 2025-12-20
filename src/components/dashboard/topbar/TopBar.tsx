@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Calculator, Calendar } from "lucide-react";
+import { Calculator } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SearchBar } from "./SearchBar";
 import { QuickAddButton } from "./QuickAddButton";
 import { UserActions } from "./UserActions";
-import { CalculatorPopup } from "./CalculatorPopup";
+import { CalculatorModal } from "./calculator/CalculatorModal";
+import { CalendarButton } from "./calendar/CalendarButton";
 
 interface TopBarProps {
   className?: string;
@@ -37,10 +38,7 @@ export function TopBar({ className }: TopBarProps) {
             <Calculator className="h-4 w-4" />
             <span className="sr-only">Calculator</span>
           </button>
-          <button type="button" className={iconButtonClass}>
-            <Calendar className="h-4 w-4" />
-            <span className="sr-only">Calendar</span>
-          </button>
+          <CalendarButton />
         </div>
 
         {/* Center section - Search */}
@@ -53,7 +51,7 @@ export function TopBar({ className }: TopBarProps) {
         </div>
       </header>
 
-      <CalculatorPopup 
+      <CalculatorModal 
         isOpen={isCalculatorOpen} 
         onClose={() => setIsCalculatorOpen(false)} 
       />
