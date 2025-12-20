@@ -4,13 +4,15 @@ import { EmptyDashboard } from "./EmptyDashboard";
 interface DashboardCanvasProps {
   className?: string;
   children?: React.ReactNode;
+  isCollapsed?: boolean;
 }
 
-export function DashboardCanvas({ className, children }: DashboardCanvasProps) {
+export function DashboardCanvas({ className, children, isCollapsed }: DashboardCanvasProps) {
   return (
     <main
       className={cn(
-        "ml-56 mt-12 flex min-h-[calc(100vh-3rem)] flex-col",
+        "mt-11 flex min-h-[calc(100vh-2.75rem)] flex-col transition-all duration-300 ease-in-out",
+        isCollapsed ? "ml-20" : "ml-72",
         className
       )}
     >

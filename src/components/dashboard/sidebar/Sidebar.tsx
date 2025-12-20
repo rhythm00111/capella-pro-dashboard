@@ -1,42 +1,22 @@
-import { useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { useSidebarContext } from "./SidebarContext";
 import { SidebarHeader } from "./SidebarHeader";
-import { SidebarItem } from "./SidebarItem";
-import { navigationItems } from "@/constants/navigation";
+import { SidebarNav } from "./SidebarNav";
 
-interface SidebarProps {
-  className?: string;
-}
-
-export function Sidebar({ className }: SidebarProps) {
-  const location = useLocation();
-  const currentPath = location.pathname;
+export function Sidebar() {
+  const { isCollapsed } = useSidebarContext();
 
   return (
     <aside
       className={cn(
-        "fixed left-0 top-0 z-40 flex h-screen w-56 flex-col bg-sidebar",
-        className
+        "fixed left-0 top-0 h-screen bg-[#0d0d0d] border-r border-zinc-900/50",
+        "flex flex-col transition-all duration-300 ease-in-out z-40",
+        isCollapsed ? "w-20" : "w-72"
       )}
     >
       <SidebarHeader />
-      
-      {/* Centered navigation */}
-      <nav className="flex flex-1 flex-col justify-center px-3 -mt-12">
-        <div className="space-y-0.5">
-          {navigationItems.map((item) => (
-            <SidebarItem
-              key={item.href}
-              label={item.label}
-              href={item.href}
-              icon={item.icon}
-              isActive={currentPath === item.href || (currentPath === "/" && item.href === "/dashboard")}
-            />
-          ))}
-        </div>
-      </nav>
-      
-      {/* Bottom spacer for future use */}
+      <SidebarNav />
+      {/* Bottom section reserved for future use */}
       <div className="h-16" />
     </aside>
   );
