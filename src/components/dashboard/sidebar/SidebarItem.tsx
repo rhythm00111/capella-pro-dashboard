@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import type { LucideIcon } from "lucide-react";
 
@@ -10,8 +11,8 @@ interface SidebarItemProps {
 
 export function SidebarItem({ label, href, icon: Icon, isActive = false }: SidebarItemProps) {
   return (
-    <a
-      href={href}
+    <Link
+      to={href}
       className={cn(
         "group relative flex items-center gap-3 px-3 py-2 text-[13px] font-normal rounded-md transition-colors duration-150",
         "focus:outline-none focus-visible:ring-1 focus-visible:ring-ring",
@@ -25,6 +26,6 @@ export function SidebarItem({ label, href, icon: Icon, isActive = false }: Sideb
       )}
       <Icon className="h-4 w-4 shrink-0 opacity-70" />
       <span>{label}</span>
-    </a>
+    </Link>
   );
 }

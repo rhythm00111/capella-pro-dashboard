@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { SidebarHeader } from "./SidebarHeader";
 import { SidebarItem } from "./SidebarItem";
@@ -5,10 +6,12 @@ import { navigationItems } from "@/constants/navigation";
 
 interface SidebarProps {
   className?: string;
-  activeHref?: string;
 }
 
-export function Sidebar({ className, activeHref = "/dashboard" }: SidebarProps) {
+export function Sidebar({ className }: SidebarProps) {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   return (
     <aside
       className={cn(
@@ -27,7 +30,7 @@ export function Sidebar({ className, activeHref = "/dashboard" }: SidebarProps) 
             label={item.label}
             href={item.href}
             icon={item.icon}
-            isActive={item.href === activeHref}
+            isActive={currentPath === item.href || (currentPath === "/" && item.href === "/dashboard")}
           />
         ))}
       </nav>
