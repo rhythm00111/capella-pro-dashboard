@@ -1,6 +1,5 @@
 import { Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { glassButton } from "@/styles/glass";
 
 interface QuickAddButtonProps {
   className?: string;
@@ -11,13 +10,13 @@ export function QuickAddButton({ className }: QuickAddButtonProps) {
     <button
       type="button"
       className={cn(
-        glassButton,
-        "flex items-center justify-center p-2.5",
-        "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "flex items-center justify-center p-1.5 rounded-md text-muted-foreground",
+        "hover:text-foreground hover:bg-secondary/50 transition-colors duration-150",
+        "focus:outline-none focus-visible:ring-1 focus-visible:ring-ring",
         className
       )}
     >
-      <Plus className="h-5 w-5 text-foreground" />
+      <Plus className="h-4 w-4" />
       <span className="sr-only">Quick add</span>
     </button>
   );

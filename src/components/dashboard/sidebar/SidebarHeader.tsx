@@ -15,15 +15,15 @@ export function SidebarHeader({
   };
 
   return (
-    <div className="px-4 py-6">
-      <h1 className="text-xl font-semibold tracking-tight text-foreground">
+    <div className="px-4 py-5">
+      <h1 className="text-sm font-medium tracking-wide text-foreground/90">
         CAPELLA PRO
       </h1>
       
-      <div className="mt-6 space-y-1">
-        <p className="text-sm text-muted-foreground">{getGreeting()}</p>
-        <p className="text-base font-medium text-foreground">{userName}</p>
-        <p className="text-sm text-muted-foreground">{userProfession}</p>
+      <div className="mt-6 space-y-0.5">
+        <p className="text-xs text-muted-foreground">{getGreeting()}</p>
+        <p className="text-sm font-normal text-foreground/80">{userName}</p>
+        <p className="text-xs text-muted-foreground">{userProfession}</p>
       </div>
     </div>
   );
