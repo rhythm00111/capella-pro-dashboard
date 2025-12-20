@@ -58,39 +58,28 @@ export function CalendarPreview({ onClose }: CalendarPreviewProps) {
 
   const monthName = today.toLocaleDateString("en-US", { month: "long", year: "numeric" });
 
-  const dayHeaders = ["S", "M", "T", "W", "T", "F", "S"];
-
   return (
     <div
-      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[220px] bg-zinc-900/95 backdrop-blur-xl border border-zinc-800/50 rounded-lg shadow-xl p-3 animate-in fade-in-0 duration-200 z-[60]"
+      className="absolute top-full left-0 mt-2 w-[280px] bg-zinc-900/90 backdrop-blur-xl border border-zinc-800/50 rounded-xl shadow-xl shadow-black/30 p-4 animate-in fade-in-0 duration-200 z-[60]"
       onMouseLeave={onClose}
     >
       {/* Month Header */}
-      <div className="text-xs font-medium text-white mb-2 text-center">{monthName}</div>
+      <div className="text-sm font-medium text-white mb-3 text-center">{monthName}</div>
 
-      {/* Day Headers */}
-      <div className="grid grid-cols-7 gap-0.5 mb-0.5">
-        {dayHeaders.map((day, i) => (
-          <div key={i} className="text-[9px] text-zinc-500 uppercase text-center py-0.5">
-            {day}
-          </div>
-        ))}
-      </div>
-
-      {/* Calendar Grid */}
-      <div className="grid grid-cols-7 gap-0.5">
+      {/* Calendar Grid - No day headers in mini version */}
+      <div className="grid grid-cols-7 gap-1">
         {calendarData.map((day, index) => (
           <div
             key={index}
             className={cn(
-              "relative h-6 w-6 flex flex-col items-center justify-center text-[10px] rounded",
+              "relative h-8 w-8 flex flex-col items-center justify-center text-sm rounded-md",
               day.isCurrentMonth ? "text-white" : "text-zinc-600",
-              day.isToday && "bg-white/10 ring-1 ring-white/20"
+              day.isToday && "bg-white/10 rounded-full"
             )}
           >
             <span>{day.day}</span>
             {day.hasEvent && day.isCurrentMonth && (
-              <span className="absolute bottom-0 w-0.5 h-0.5 bg-red-500 rounded-full" />
+              <span className="absolute bottom-0.5 w-1 h-1 bg-red-500 rounded-full" />
             )}
           </div>
         ))}
