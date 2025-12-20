@@ -15,9 +15,6 @@ export function SearchBar({ className }: SearchBarProps) {
         placeholder="Search anything..."
         className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
       />
-      <kbd className="hidden sm:inline-flex items-center gap-1 rounded border border-border bg-muted px-2 py-0.5 text-xs text-muted-foreground">
-        <span className="text-xs">⌘</span>K
-      </kbd>
     </div>
   );
 }
