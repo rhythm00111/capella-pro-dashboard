@@ -23,7 +23,6 @@ export function CurrencyConverter() {
     if (!amount || isNaN(parseFloat(amount))) return null;
     
     const value = parseFloat(amount);
-    // Convert to USD first, then to target currency
     const usdValue = value / EXCHANGE_RATES[fromCurrency];
     const result = usdValue * EXCHANGE_RATES[toCurrency];
     
@@ -43,23 +42,23 @@ export function CurrencyConverter() {
   };
 
   const selectClass = cn(
-    "bg-zinc-800/50 border border-zinc-700/50 rounded-xl px-4 py-3",
-    "text-white text-sm focus:outline-none focus:ring-1 focus:ring-zinc-600",
+    "bg-zinc-800/50 border border-zinc-700/50 rounded-lg px-2 py-2",
+    "text-white text-xs focus:outline-none focus:ring-1 focus:ring-zinc-600",
     "appearance-none cursor-pointer"
   );
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
       {/* From Currency */}
-      <div className="space-y-2">
-        <label className="text-sm text-zinc-400">From</label>
-        <div className="flex gap-3">
+      <div className="space-y-1.5">
+        <label className="text-xs text-zinc-400">From</label>
+        <div className="flex gap-2">
           <input
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             placeholder="0.00"
-            className="flex-1 bg-black/30 border border-zinc-800/30 rounded-xl px-6 py-4 text-2xl text-white text-center placeholder:text-zinc-600 focus:outline-none focus:ring-1 focus:ring-zinc-600"
+            className="flex-1 bg-black/40 border border-zinc-800/30 rounded-lg px-3 py-2 text-lg text-white text-center placeholder:text-zinc-600 focus:outline-none focus:ring-1 focus:ring-zinc-600"
           />
           <select
             value={fromCurrency}
@@ -79,17 +78,17 @@ export function CurrencyConverter() {
       <div className="flex justify-center">
         <button
           onClick={handleSwap}
-          className="p-3 rounded-full bg-zinc-800/50 text-zinc-400 hover:text-white hover:bg-zinc-700/50 transition-all duration-200 active:scale-95"
+          className="p-2 rounded-full bg-zinc-800/50 text-zinc-400 hover:text-white hover:bg-zinc-700/50 transition-all duration-200 active:scale-95"
         >
-          <ArrowUpDown className="h-4 w-4" />
+          <ArrowUpDown className="h-3.5 w-3.5" />
         </button>
       </div>
 
       {/* To Currency */}
-      <div className="space-y-2">
-        <label className="text-sm text-zinc-400">To</label>
-        <div className="flex gap-3">
-          <div className="flex-1 bg-black/30 border border-zinc-800/30 rounded-xl px-6 py-4 text-2xl text-white text-center min-h-[64px] flex items-center justify-center">
+      <div className="space-y-1.5">
+        <label className="text-xs text-zinc-400">To</label>
+        <div className="flex gap-2">
+          <div className="flex-1 bg-black/40 border border-zinc-800/30 rounded-lg px-3 py-2 text-lg text-white text-center min-h-[44px] flex items-center justify-center">
             {convertedAmount !== null ? (
               <span>{formatCurrency(convertedAmount, toCurrency)}</span>
             ) : (
@@ -111,7 +110,7 @@ export function CurrencyConverter() {
       </div>
 
       {/* Rate info */}
-      <p className="text-xs text-zinc-500 text-center pt-2">
+      <p className="text-[10px] text-zinc-500 text-center pt-1">
         1 {fromCurrency} = {(EXCHANGE_RATES[toCurrency] / EXCHANGE_RATES[fromCurrency]).toFixed(4)} {toCurrency}
       </p>
     </div>

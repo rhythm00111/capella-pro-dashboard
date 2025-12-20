@@ -88,7 +88,6 @@ export function StandardCalculator() {
       setDisplay("Error");
       setHasError(true);
     } else {
-      // Format result to avoid long decimals
       const formatted = Number.isInteger(result) 
         ? String(result) 
         : parseFloat(result.toFixed(10)).toString();
@@ -130,18 +129,18 @@ export function StandardCalculator() {
 
   const getButtonStyle = (btn: string) => {
     if (btn === "C") {
-      return "bg-red-500/20 hover:bg-red-500/30 text-red-400 active:scale-95";
+      return "bg-zinc-700/40 hover:bg-zinc-600/50 text-zinc-300";
     }
     if (btn === "±" || btn === "%") {
-      return "bg-zinc-800/50 hover:bg-zinc-700/50 text-white active:scale-95";
+      return "bg-zinc-700/40 hover:bg-zinc-600/50 text-zinc-300";
     }
     if (["÷", "×", "-", "+"].includes(btn)) {
-      return "bg-zinc-700/50 hover:bg-zinc-600/50 text-white active:scale-95";
+      return "bg-amber-600/80 hover:bg-amber-500/80 text-white";
     }
     if (btn === "=") {
-      return "bg-white/10 hover:bg-white/20 text-white active:scale-95";
+      return "bg-amber-600/80 hover:bg-amber-500/80 text-white";
     }
-    return "bg-zinc-800/50 hover:bg-zinc-700/50 text-white active:scale-95";
+    return "bg-zinc-800/60 hover:bg-zinc-700/60 text-white";
   };
 
   const handleButtonClick = (btn: string) => {
@@ -163,11 +162,11 @@ export function StandardCalculator() {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       {/* Display */}
-      <div className="bg-black/30 rounded-xl px-6 py-5 text-right border border-zinc-800/30 min-h-[72px] flex items-center justify-end">
+      <div className="bg-black/40 rounded-lg px-3 py-3 text-right border border-zinc-800/30">
         <span className={cn(
-          "text-3xl font-light text-white tracking-wide",
+          "text-2xl font-light text-white tracking-wide",
           hasError && "text-red-400"
         )}>
           {display}
@@ -175,15 +174,15 @@ export function StandardCalculator() {
       </div>
 
       {/* Keypad */}
-      <div className="grid gap-2">
+      <div className="grid gap-1.5">
         {buttons.map((row, rowIndex) => (
-          <div key={rowIndex} className="grid grid-cols-4 gap-2">
+          <div key={rowIndex} className="grid grid-cols-4 gap-1.5">
             {row.map((btn) => (
               <button
                 key={btn}
                 onClick={() => handleButtonClick(btn)}
                 className={cn(
-                  "py-4 rounded-xl text-base font-medium transition-all duration-150",
+                  "py-2.5 rounded-lg text-sm font-medium transition-all duration-150 active:scale-95",
                   btn === "0" ? "col-span-2" : "",
                   getButtonStyle(btn)
                 )}

@@ -42,8 +42,8 @@ export function CalendarPreview({ onClose }: CalendarPreviewProps) {
       });
     }
 
-    // Next month days
-    const remainingDays = 42 - days.length;
+    // Next month days - only complete 5 rows
+    const remainingDays = 35 - days.length > 0 ? 35 - days.length : 42 - days.length;
     for (let day = 1; day <= remainingDays; day++) {
       days.push({
         day,
@@ -58,39 +58,39 @@ export function CalendarPreview({ onClose }: CalendarPreviewProps) {
 
   const monthName = today.toLocaleDateString("en-US", { month: "long", year: "numeric" });
 
-  const dayHeaders = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const dayHeaders = ["S", "M", "T", "W", "T", "F", "S"];
 
   return (
     <div
-      className="absolute top-full left-0 mt-2 w-[280px] bg-zinc-900/90 backdrop-blur-xl border border-zinc-800/50 rounded-xl shadow-xl p-4 animate-in fade-in-0 duration-200 z-50"
+      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[220px] bg-zinc-900/95 backdrop-blur-xl border border-zinc-800/50 rounded-lg shadow-xl p-3 animate-in fade-in-0 duration-200 z-[60]"
       onMouseLeave={onClose}
     >
       {/* Month Header */}
-      <div className="text-sm font-medium text-white mb-3">{monthName}</div>
+      <div className="text-xs font-medium text-white mb-2 text-center">{monthName}</div>
 
       {/* Day Headers */}
-      <div className="grid grid-cols-7 gap-1 mb-1">
-        {dayHeaders.map((day) => (
-          <div key={day} className="text-xs text-zinc-500 uppercase text-center py-1">
-            {day.charAt(0)}
+      <div className="grid grid-cols-7 gap-0.5 mb-0.5">
+        {dayHeaders.map((day, i) => (
+          <div key={i} className="text-[9px] text-zinc-500 uppercase text-center py-0.5">
+            {day}
           </div>
         ))}
       </div>
 
       {/* Calendar Grid */}
-      <div className="grid grid-cols-7 gap-1">
+      <div className="grid grid-cols-7 gap-0.5">
         {calendarData.map((day, index) => (
           <div
             key={index}
             className={cn(
-              "relative h-8 w-8 flex flex-col items-center justify-center text-sm rounded-full",
+              "relative h-6 w-6 flex flex-col items-center justify-center text-[10px] rounded",
               day.isCurrentMonth ? "text-white" : "text-zinc-600",
-              day.isToday && "bg-white/10"
+              day.isToday && "bg-white/10 ring-1 ring-white/20"
             )}
           >
             <span>{day.day}</span>
             {day.hasEvent && day.isCurrentMonth && (
-              <span className="absolute bottom-0.5 w-1 h-1 bg-red-500 rounded-full" />
+              <span className="absolute bottom-0 w-0.5 h-0.5 bg-red-500 rounded-full" />
             )}
           </div>
         ))}
