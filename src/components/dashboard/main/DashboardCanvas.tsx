@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { EmptyDashboard } from "./EmptyDashboard";
 import { DraggableWidget } from "../widgets/DraggableWidget";
@@ -27,8 +26,8 @@ export function DashboardCanvas({
   return (
     <main
       className={cn(
-        "relative mt-11 flex min-h-[calc(100vh-2.75rem)] flex-col transition-all duration-300 ease-in-out",
-        isCollapsed ? "ml-20" : "ml-72",
+        "relative mt-12 flex min-h-[calc(100vh-3rem)] flex-col transition-all duration-300 ease-in-out",
+        isCollapsed ? "ml-16" : "ml-64",
         className
       )}
     >

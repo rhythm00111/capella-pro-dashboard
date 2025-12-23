@@ -26,24 +26,24 @@ export function DraggableWidget({
     >
       <div
         ref={nodeRef}
-        className="absolute z-50 bg-zinc-900/95 backdrop-blur-xl border border-zinc-800/50 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden"
+        className="absolute z-50 bg-popover/95 backdrop-blur-xl border border-border rounded-xl shadow-2xl shadow-black/40 overflow-hidden"
       >
         {/* Draggable Header */}
-        <div className="drag-handle flex items-center justify-between px-4 py-3 border-b border-zinc-800/30 cursor-grab active:cursor-grabbing">
+        <div className="drag-handle flex items-center justify-between px-3 py-2.5 border-b border-border cursor-grab active:cursor-grabbing">
           <div className="flex items-center gap-2">
-            <GripHorizontal className="w-4 h-4 text-zinc-500" />
-            <h3 className="text-sm font-medium text-white">{title}</h3>
+            <GripHorizontal className="w-3.5 h-3.5 text-muted-foreground/50" strokeWidth={1.5} />
+            <h3 className="text-[13px] font-medium text-foreground/90">{title}</h3>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-md text-zinc-400 hover:text-white hover:bg-zinc-800/50 transition-colors"
+            className="p-1 rounded-md text-muted-foreground hover:text-foreground/80 hover:bg-secondary/50 transition-colors duration-150"
           >
-            <X className="w-4 h-4" />
+            <X className="w-3.5 h-3.5" strokeWidth={1.5} />
           </button>
         </div>
 
         {/* Widget Content */}
-        <div className="p-4">{children}</div>
+        <div className="p-3">{children}</div>
       </div>
     </Draggable>
   );
