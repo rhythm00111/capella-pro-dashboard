@@ -1,7 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
+import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSidebarContext } from "./SidebarContext";
-import type { LucideIcon } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface SidebarNavItemProps {
   icon: LucideIcon;
@@ -16,65 +22,65 @@ export function SidebarNavItem({ icon: Icon, label, href }: SidebarNavItemProps)
     (href === "/dashboard" && location.pathname === "/");
 
   const handleClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent bubbling to parent - fixes collapse bug
+    e.stopPropagation();
   };
 
-  return (
+  const linkContent = (
     <Link
       to={href}
       onClick={handleClick}
       className={cn(
-        "w-full flex items-center gap-3 rounded-lg transition-all duration-200",
-        "active:scale-[0.98] relative group",
-        isCollapsed ? "px-0 py-3 justify-center" : "px-4 py-3",
+        "w-full flex items-center rounded-md transition-all duration-150",
+        "relative group",
+        isCollapsed ? "px-0 py-2.5 justify-center" : "px-3 py-2.5 gap-3",
         
-        // Active state - teal accent
-        isActive && !isCollapsed && [
-          "bg-teal-500/10",
-          "border-l-2 border-teal-500",
-          "pl-[14px]",
-          "rounded-l-none",
-          "active:bg-teal-500/20",
-          "active:shadow-[0_0_20px_rgba(20,184,166,0.3)]"
-        ],
-        isActive && isCollapsed && [
-          "bg-teal-500/10",
-          "border-l-2 border-teal-500",
-          "active:bg-teal-500/20",
-          "active:shadow-[0_0_20px_rgba(20,184,166,0.3)]"
+        // Active state - subtle, earned accent
+        isActive && [
+          "bg-secondary/80",
+          !isCollapsed && "before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-0.5 before:h-4 before:bg-foreground/60 before:rounded-full"
         ],
         
-        // Inactive state
-        !isActive && "hover:bg-white/5 hover:shadow-[0_0_15px_rgba(255,255,255,0.05)]"
+        // Inactive state - very subtle hover
+        !isActive && "hover:bg-secondary/40"
       )}
     >
       <Icon
         className={cn(
-          "w-4 h-4 transition-colors duration-200",
-          isActive ? "text-teal-400" : "text-zinc-500 group-hover:text-zinc-300"
+          "w-4 h-4 transition-colors duration-150 flex-shrink-0",
+          isActive ? "text-foreground/90" : "text-muted-foreground group-hover:text-foreground/70"
         )}
         strokeWidth={1.5}
       />
 
+      {/* Label - only show when not collapsed */}
       {!isCollapsed && (
         <span
           className={cn(
-            "text-sm transition-colors duration-200",
-            isActive ? "text-teal-400 font-medium" : "text-zinc-400 group-hover:text-zinc-200"
+            "text-[13px] transition-colors duration-150",
+            isActive ? "text-foreground/90 font-medium" : "text-sidebar-foreground group-hover:text-foreground/70"
           )}
         >
           {label}
         </span>
       )}
-
-      {/* Tooltip for collapsed state */}
-      {isCollapsed && (
-        <div className="absolute left-full ml-3 px-3 py-1.5 bg-zinc-800 rounded-md text-xs text-white
-                        opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200
-                        shadow-lg z-50 whitespace-nowrap">
-          {label}
-        </div>
-      )}
     </Link>
   );
+
+  // Show tooltip when collapsed
+  if (isCollapsed) {
+    return (
+      <TooltipProvider delayDuration={200}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            {linkContent}
+          </TooltipTrigger>
+          <TooltipContent side="right" className="text-xs font-normal">
+            {label}
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    );
+  }
+
+  return linkContent;
 }
