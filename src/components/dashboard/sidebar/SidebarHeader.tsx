@@ -20,10 +20,10 @@ export function SidebarHeader() {
 
   return (
     <div className={cn(
-      "relative border-b border-sidebar-border transition-all duration-300",
+      "relative border-b border-border transition-all duration-300",
       isCollapsed ? "px-3 py-6" : "px-6 py-8"
     )}>
-      {/* Collapse/Uncollapse Button - improved discoverability */}
+      {/* Collapse/Uncollapse Button */}
       <TooltipProvider delayDuration={400}>
         <Tooltip>
           <TooltipTrigger asChild>
@@ -31,18 +31,18 @@ export function SidebarHeader() {
               onClick={toggleCollapsed}
               className={cn(
                 "absolute w-6 h-6 rounded-md",
-                "bg-transparent hover:bg-secondary/60",
-                "text-muted-foreground hover:text-foreground/80",
+                "bg-transparent hover:bg-secondary",
+                "text-muted-foreground hover:text-foreground",
                 "transition-all duration-200 active:scale-95",
                 "flex items-center justify-center",
-                "focus:outline-none focus-visible:ring-1 focus-visible:ring-ring/50",
+                "focus:outline-none focus-visible:ring-1 focus-visible:ring-ring",
                 isCollapsed ? "top-5 right-3" : "top-7 right-5"
               )}
             >
               {isCollapsed ? (
-                <ChevronRight className="w-3.5 h-3.5" strokeWidth={1.5} />
+                <ChevronRight className="w-4 h-4" strokeWidth={1.5} />
               ) : (
-                <ChevronLeft className="w-3.5 h-3.5" strokeWidth={1.5} />
+                <ChevronLeft className="w-4 h-4" strokeWidth={1.5} />
               )}
             </button>
           </TooltipTrigger>
@@ -54,22 +54,22 @@ export function SidebarHeader() {
 
       {isCollapsed ? (
         /* Collapsed: Show only "C" logo */
-        <div className="w-9 h-9 rounded-lg bg-secondary/40 flex items-center justify-center mx-auto">
-          <span className="text-foreground/90 font-medium text-sm tracking-tight">C</span>
+        <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center mx-auto">
+          <span className="text-foreground font-semibold text-base">C</span>
         </div>
       ) : (
         /* Expanded: Show full header */
         <>
-          {/* Logo - calm, not bold */}
-          <div className="text-[11px] font-medium tracking-[0.2em] text-muted-foreground uppercase mb-8">
+          {/* Logo */}
+          <div className="text-xs font-semibold tracking-[0.25em] text-muted-foreground uppercase mb-8">
             CAPELLA PRO
           </div>
           
           {/* User greeting section */}
           <div className="space-y-1">
-            <div className="text-[13px] text-muted-foreground font-normal">{getGreeting()}</div>
-            <div className="text-lg font-medium text-foreground/90 tracking-tight">User Name</div>
-            <div className="text-[13px] text-muted-foreground/70 font-normal">Your Profession</div>
+            <div className="text-sm text-muted-foreground">{getGreeting()}</div>
+            <div className="text-xl font-semibold text-foreground">User Name</div>
+            <div className="text-sm text-muted-foreground">Your Profession</div>
           </div>
         </>
       )}

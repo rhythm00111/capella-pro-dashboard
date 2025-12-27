@@ -2,86 +2,87 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Capella Pro Design System - Premium Carbon Dark */
+/* Capella Pro Design System - Premium Black with Orange Accent */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;600;700&display=swap');
 
 @layer base {
   :root {
-    /* Deep carbon black - premium background system */
-    --background: 225 8% 6%;
-    --foreground: 220 8% 88%;
+    /* Pure black backgrounds */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
 
-    --card: 225 8% 8%;
-    --card-foreground: 220 8% 85%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 225 8% 9%;
-    --popover-foreground: 220 8% 85%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 215 70% 58%;
-    --primary-foreground: 225 8% 6%;
+    /* Orange accent - primary */
+    --primary: 24 95% 53%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 225 6% 11%;
-    --secondary-foreground: 220 8% 70%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 53%;
 
-    --muted: 225 6% 13%;
-    --muted-foreground: 220 6% 45%;
+    --muted: 0 0% 8%;
+    --muted-foreground: 0 0% 53%;
 
-    --accent: 225 6% 14%;
-    --accent-foreground: 220 8% 80%;
+    --accent: 24 95% 53%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 50% 50%;
-    --destructive-foreground: 220 8% 92%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 225 6% 12%;
-    --input: 225 6% 10%;
-    --ring: 215 70% 58%;
+    --border: 0 0% 10%;
+    --input: 0 0% 6%;
+    --ring: 24 95% 53%;
 
     --radius: 0.5rem;
 
     /* Glass tokens - ultra subtle */
-    --glass-bg: 220 20% 100% / 0.015;
-    --glass-border: 220 20% 100% / 0.04;
-    --glass-hover: 220 20% 100% / 0.03;
-    --glass-active: 220 20% 100% / 0.05;
+    --glass-bg: 0 0% 100% / 0.02;
+    --glass-border: 0 0% 100% / 0.06;
+    --glass-hover: 0 0% 100% / 0.04;
+    --glass-active: 0 0% 100% / 0.06;
 
-    /* Sidebar - slightly lighter than main bg */
-    --sidebar-background: 225 8% 7%;
-    --sidebar-foreground: 220 6% 50%;
-    --sidebar-foreground-active: 220 8% 92%;
-    --sidebar-primary: 215 70% 58%;
-    --sidebar-hover: 220 12% 100% / 0.025;
-    --sidebar-active: 220 12% 100% / 0.04;
-    --sidebar-border: 225 6% 10%;
+    /* Sidebar - pure black */
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 0 0% 53%;
+    --sidebar-foreground-active: 0 0% 100%;
+    --sidebar-primary: 24 95% 53%;
+    --sidebar-hover: 0 0% 10%;
+    --sidebar-active: 24 95% 53% / 0.1;
+    --sidebar-border: 0 0% 10%;
 
-    /* Topbar - slightly lighter than sidebar */
-    --topbar-background: 225 8% 7%;
-    --topbar-border: 225 6% 10%;
+    /* Topbar - pure black with border */
+    --topbar-background: 0 0% 0%;
+    --topbar-border: 0 0% 10%;
 
     /* Typography */
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 
   .dark {
-    --background: 225 8% 6%;
-    --foreground: 220 8% 88%;
-    --card: 225 8% 8%;
-    --card-foreground: 220 8% 85%;
-    --popover: 225 8% 9%;
-    --popover-foreground: 220 8% 85%;
-    --primary: 215 70% 58%;
-    --primary-foreground: 225 8% 6%;
-    --secondary: 225 6% 11%;
-    --secondary-foreground: 220 8% 70%;
-    --muted: 225 6% 13%;
-    --muted-foreground: 220 6% 45%;
-    --accent: 225 6% 14%;
-    --accent-foreground: 220 8% 80%;
-    --destructive: 0 50% 50%;
-    --destructive-foreground: 220 8% 92%;
-    --border: 225 6% 12%;
-    --input: 225 6% 10%;
-    --ring: 215 70% 58%;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 24 95% 53%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 53%;
+    --muted: 0 0% 8%;
+    --muted-foreground: 0 0% 53%;
+    --accent: 24 95% 53%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 10%;
+    --input: 0 0% 6%;
+    --ring: 24 95% 53%;
   }
 }
 
@@ -112,8 +113,8 @@
 
   .glass-popup {
     @apply backdrop-blur-xl;
-    background: hsl(225 8% 10% / 0.95);
+    background: hsl(0 0% 4% / 0.95);
     border: 1px solid hsl(var(--glass-border));
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
   }
 }

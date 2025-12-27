@@ -10,10 +10,10 @@ export function Sidebar() {
     <aside
       className={cn(
         "fixed left-0 top-0 h-screen",
-        "bg-[hsl(var(--sidebar-background))]",
-        "border-r border-sidebar-border",
+        "bg-background",
+        "border-r border-border",
         "flex flex-col transition-all duration-300 ease-in-out z-40",
-        isCollapsed ? "w-16" : "w-64"
+        isCollapsed ? "w-16" : "w-60"
       )}
     >
       <SidebarHeader />

@@ -42,7 +42,7 @@ export function CalendarPreview({ onClose }: CalendarPreviewProps) {
       });
     }
 
-    // Next month days - only complete 5 rows
+    // Next month days
     const remainingDays = 35 - days.length > 0 ? 35 - days.length : 42 - days.length;
     for (let day = 1; day <= remainingDays; day++) {
       days.push({
@@ -60,26 +60,35 @@ export function CalendarPreview({ onClose }: CalendarPreviewProps) {
 
   return (
     <div
-      className="absolute top-full left-0 mt-2 w-[280px] bg-zinc-900/90 backdrop-blur-xl border border-zinc-800/50 rounded-xl shadow-xl shadow-black/30 p-4 animate-in fade-in-0 duration-200 z-[60]"
+      className="absolute top-full left-0 mt-2 w-80 glass-popup rounded-xl p-4 animate-in fade-in-0 zoom-in-95 duration-200 z-[60]"
       onMouseLeave={onClose}
     >
       {/* Month Header */}
-      <div className="text-sm font-medium text-white mb-3 text-center">{monthName}</div>
+      <div className="text-sm font-medium text-foreground mb-4 text-center">{monthName}</div>
 
-      {/* Calendar Grid - No day headers in mini version */}
+      {/* Day Headers */}
+      <div className="grid grid-cols-7 gap-1 mb-2">
+        {["S", "M", "T", "W", "T", "F", "S"].map((day, i) => (
+          <div key={i} className="h-9 w-9 flex items-center justify-center text-xs text-muted-foreground">
+            {day}
+          </div>
+        ))}
+      </div>
+
+      {/* Calendar Grid */}
       <div className="grid grid-cols-7 gap-1">
         {calendarData.map((day, index) => (
           <div
             key={index}
             className={cn(
-              "relative h-8 w-8 flex flex-col items-center justify-center text-sm rounded-md",
-              day.isCurrentMonth ? "text-white" : "text-zinc-600",
-              day.isToday && "bg-white/10 rounded-full"
+              "relative h-9 w-9 flex flex-col items-center justify-center text-sm rounded-md cursor-pointer transition-colors duration-150",
+              day.isCurrentMonth ? "text-foreground hover:bg-secondary" : "text-muted-foreground/30",
+              day.isToday && "bg-secondary border border-primary text-primary font-medium"
             )}
           >
             <span>{day.day}</span>
             {day.hasEvent && day.isCurrentMonth && (
-              <span className="absolute bottom-0.5 w-1 h-1 bg-red-500 rounded-full" />
+              <span className="absolute bottom-1 w-1 h-1 bg-destructive rounded-full" />
             )}
           </div>
         ))}

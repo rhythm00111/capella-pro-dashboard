@@ -26,8 +26,8 @@ export function DashboardCanvas({
   return (
     <main
       className={cn(
-        "relative mt-12 flex min-h-[calc(100vh-3rem)] flex-col transition-all duration-300 ease-in-out",
-        isCollapsed ? "ml-16" : "ml-64",
+        "relative mt-16 flex min-h-[calc(100vh-4rem)] flex-col transition-all duration-300 ease-in-out p-8",
+        isCollapsed ? "ml-16" : "ml-60",
         className
       )}
     >
@@ -38,7 +38,7 @@ export function DashboardCanvas({
         <DraggableWidget
           title="Calculator"
           onClose={onCloseCalculator}
-          defaultPosition={{ x: 100, y: 100 }}
+          defaultPosition={{ x: 100, y: 50 }}
         >
           <CalculatorWidget />
         </DraggableWidget>
@@ -49,7 +49,7 @@ export function DashboardCanvas({
         <DraggableWidget
           title="Calendar"
           onClose={onCloseCalendar}
-          defaultPosition={{ x: 450, y: 100 }}
+          defaultPosition={{ x: 450, y: 50 }}
         >
           <CalendarWidget />
         </DraggableWidget>

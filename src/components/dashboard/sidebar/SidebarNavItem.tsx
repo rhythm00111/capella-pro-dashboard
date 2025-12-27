@@ -30,24 +30,27 @@ export function SidebarNavItem({ icon: Icon, label, href }: SidebarNavItemProps)
       to={href}
       onClick={handleClick}
       className={cn(
-        "w-full flex items-center rounded-md transition-all duration-150",
+        "w-full flex items-center rounded-md transition-all duration-200",
         "relative group",
-        isCollapsed ? "px-0 py-2.5 justify-center" : "px-3 py-2.5 gap-3",
+        isCollapsed ? "px-0 py-2.5 justify-center" : "px-4 py-2.5 gap-3",
         
-        // Active state - subtle, earned accent
+        // Active state - orange accent
         isActive && [
-          "bg-secondary/80",
-          !isCollapsed && "before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-0.5 before:h-4 before:bg-foreground/60 before:rounded-full"
+          "bg-primary/10",
+          !isCollapsed && "border-l-2 border-primary pl-[14px]"
         ],
         
-        // Inactive state - very subtle hover
-        !isActive && "hover:bg-secondary/40"
+        // Collapsed active state
+        isActive && isCollapsed && "bg-primary/10",
+        
+        // Inactive hover state
+        !isActive && "hover:bg-secondary"
       )}
     >
       <Icon
         className={cn(
-          "w-4 h-4 transition-colors duration-150 flex-shrink-0",
-          isActive ? "text-foreground/90" : "text-muted-foreground group-hover:text-foreground/70"
+          "w-5 h-5 transition-colors duration-200 flex-shrink-0",
+          isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground/80"
         )}
         strokeWidth={1.5}
       />
@@ -56,8 +59,8 @@ export function SidebarNavItem({ icon: Icon, label, href }: SidebarNavItemProps)
       {!isCollapsed && (
         <span
           className={cn(
-            "text-[13px] transition-colors duration-150",
-            isActive ? "text-foreground/90 font-medium" : "text-sidebar-foreground group-hover:text-foreground/70"
+            "text-sm transition-colors duration-200",
+            isActive ? "text-primary font-medium" : "text-muted-foreground group-hover:text-foreground/80"
           )}
         >
           {label}
