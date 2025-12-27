@@ -10,15 +10,17 @@ export function QuickAddButton({ className }: QuickAddButtonProps) {
     <button
       type="button"
       className={cn(
-        "flex items-center justify-center w-8 h-8 rounded-md",
-        "text-muted-foreground hover:text-foreground/80",
-        "hover:bg-secondary/50 transition-colors duration-150",
-        "focus:outline-none focus-visible:ring-1 focus-visible:ring-ring/50",
+        "flex items-center justify-center w-9 h-9 rounded-md",
+        "bg-primary text-primary-foreground",
+        "hover:bg-primary/90",
+        "transition-all duration-150",
+        "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        "active:scale-95",
         className
       )}
     >
-      <Plus className="h-4 w-4" strokeWidth={1.5} />
-      <span className="sr-only">Quick add</span>
+      <Plus className="h-5 w-5" strokeWidth={2} />
+      <span className="sr-only">Add new</span>
     </button>
   );
 }

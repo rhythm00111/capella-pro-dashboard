@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { cn } from "@/lib/utils";
 
 export function StandardCalculator() {
@@ -8,7 +8,7 @@ export function StandardCalculator() {
   const [waitingForNewNumber, setWaitingForNewNumber] = useState(false);
   const [hasError, setHasError] = useState(false);
 
-  const handleNumberClick = (num: string) => {
+  const handleNumberClick = useCallback((num: string) => {
     if (hasError) {
       setDisplay(num);
       setHasError(false);
@@ -19,11 +19,11 @@ export function StandardCalculator() {
       setDisplay(num);
       setWaitingForNewNumber(false);
     } else {
-      setDisplay(display === "0" ? num : display + num);
+      setDisplay(prev => prev === "0" ? num : prev + num);
     }
-  };
+  }, [hasError, waitingForNewNumber]);
 
-  const handleDecimalClick = () => {
+  const handleDecimalClick = useCallback(() => {
     if (hasError) {
       setDisplay("0.");
       setHasError(false);
@@ -33,12 +33,28 @@ export function StandardCalculator() {
     if (waitingForNewNumber) {
       setDisplay("0.");
       setWaitingForNewNumber(false);
-    } else if (!display.includes(".")) {
-      setDisplay(display + ".");
+    } else {
+      setDisplay(prev => !prev.includes(".") ? prev + "." : prev);
+    }
+  }, [hasError, waitingForNewNumber]);
+
+  const calculate = (a: number, b: number, op: string): number | "Error" => {
+    switch (op) {
+      case "+":
+        return a + b;
+      case "-":
+        return a - b;
+      case "×":
+        return a * b;
+      case "÷":
+        if (b === 0) return "Error";
+        return a / b;
+      default:
+        return b;
     }
   };
 
-  const handleOperatorClick = (op: string) => {
+  const handleOperatorClick = useCallback((op: string) => {
     if (hasError) return;
 
     const current = parseFloat(display);
@@ -60,25 +76,9 @@ export function StandardCalculator() {
 
     setOperator(op);
     setWaitingForNewNumber(true);
-  };
+  }, [display, hasError, operator, previousValue, waitingForNewNumber]);
 
-  const calculate = (a: number, b: number, op: string): number | "Error" => {
-    switch (op) {
-      case "+":
-        return a + b;
-      case "-":
-        return a - b;
-      case "×":
-        return a * b;
-      case "÷":
-        if (b === 0) return "Error";
-        return a / b;
-      default:
-        return b;
-    }
-  };
-
-  const handleEquals = () => {
+  const handleEquals = useCallback(() => {
     if (hasError || previousValue === null || operator === null) return;
 
     const current = parseFloat(display);
@@ -97,27 +97,52 @@ export function StandardCalculator() {
     setPreviousValue(null);
     setOperator(null);
     setWaitingForNewNumber(true);
-  };
+  }, [display, hasError, operator, previousValue]);
 
-  const handleClear = () => {
+  const handleClear = useCallback(() => {
     setDisplay("0");
     setPreviousValue(null);
     setOperator(null);
     setWaitingForNewNumber(false);
     setHasError(false);
-  };
+  }, []);
 
-  const handleToggleSign = () => {
+  const handleToggleSign = useCallback(() => {
     if (hasError) return;
-    const value = parseFloat(display);
-    setDisplay(String(value * -1));
-  };
+    setDisplay(prev => String(parseFloat(prev) * -1));
+  }, [hasError]);
 
-  const handlePercentage = () => {
+  const handlePercentage = useCallback(() => {
     if (hasError) return;
-    const value = parseFloat(display);
-    setDisplay(String(value / 100));
-  };
+    setDisplay(prev => String(parseFloat(prev) / 100));
+  }, [hasError]);
+
+  // Keyboard support
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key >= "0" && e.key <= "9") {
+        handleNumberClick(e.key);
+      } else if (e.key === ".") {
+        handleDecimalClick();
+      } else if (e.key === "+" || e.key === "-") {
+        handleOperatorClick(e.key);
+      } else if (e.key === "*") {
+        handleOperatorClick("×");
+      } else if (e.key === "/") {
+        e.preventDefault();
+        handleOperatorClick("÷");
+      } else if (e.key === "Enter" || e.key === "=") {
+        handleEquals();
+      } else if (e.key === "Escape" || e.key === "c" || e.key === "C") {
+        handleClear();
+      } else if (e.key === "%") {
+        handlePercentage();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleNumberClick, handleDecimalClick, handleOperatorClick, handleEquals, handleClear, handlePercentage]);
 
   const buttons = [
     ["C", "±", "%", "÷"],
@@ -128,19 +153,16 @@ export function StandardCalculator() {
   ];
 
   const getButtonStyle = (btn: string) => {
-    if (btn === "C") {
-      return "bg-zinc-700/40 hover:bg-zinc-600/50 text-zinc-300";
+    // Function buttons (C, ±, %)
+    if (btn === "C" || btn === "±" || btn === "%") {
+      return "bg-secondary hover:bg-secondary/80 text-foreground";
     }
-    if (btn === "±" || btn === "%") {
-      return "bg-zinc-700/40 hover:bg-zinc-600/50 text-zinc-300";
+    // Operator buttons - orange gradient
+    if (["÷", "×", "-", "+", "="].includes(btn)) {
+      return "bg-gradient-to-b from-primary to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white font-semibold shadow-lg shadow-primary/20";
     }
-    if (["÷", "×", "-", "+"].includes(btn)) {
-      return "bg-amber-600/80 hover:bg-amber-500/80 text-white";
-    }
-    if (btn === "=") {
-      return "bg-amber-600/80 hover:bg-amber-500/80 text-white";
-    }
-    return "bg-zinc-800/60 hover:bg-zinc-700/60 text-white";
+    // Number buttons
+    return "bg-secondary/60 hover:bg-secondary text-foreground";
   };
 
   const handleButtonClick = (btn: string) => {
@@ -161,28 +183,40 @@ export function StandardCalculator() {
     }
   };
 
+  // Format display for large numbers
+  const formatDisplay = (value: string) => {
+    if (value === "Error") return value;
+    const num = parseFloat(value);
+    if (isNaN(num)) return value;
+    if (Math.abs(num) >= 1e10) {
+      return num.toExponential(4);
+    }
+    return value;
+  };
+
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       {/* Display */}
-      <div className="bg-black/40 rounded-lg px-3 py-3 text-right border border-zinc-800/30">
+      <div className="bg-background rounded-lg px-4 py-4 text-right border border-border">
         <span className={cn(
-          "text-2xl font-light text-white tracking-wide",
-          hasError && "text-red-400"
+          "text-3xl font-light text-foreground tracking-wide",
+          hasError && "text-destructive"
         )}>
-          {display}
+          {formatDisplay(display)}
         </span>
       </div>
 
       {/* Keypad */}
-      <div className="grid gap-1.5">
+      <div className="grid gap-2">
         {buttons.map((row, rowIndex) => (
-          <div key={rowIndex} className="grid grid-cols-4 gap-1.5">
+          <div key={rowIndex} className="grid grid-cols-4 gap-2">
             {row.map((btn) => (
               <button
                 key={btn}
                 onClick={() => handleButtonClick(btn)}
                 className={cn(
-                  "py-2.5 rounded-lg text-sm font-medium transition-all duration-150 active:scale-95",
+                  "h-12 rounded-lg text-base font-medium transition-all duration-150",
+                  "active:scale-95 active:opacity-90",
                   btn === "0" ? "col-span-2" : "",
                   getButtonStyle(btn)
                 )}

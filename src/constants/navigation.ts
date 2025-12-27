@@ -1,11 +1,9 @@
 import {
-  LayoutDashboard,
+  LayoutGrid,
   CheckSquare,
-  CalendarDays,
-  Wallet,
-  Users,
+  Calendar,
   FileText,
-  Presentation,
+  MessageSquare,
   type LucideIcon,
 } from "lucide-react";
 
@@ -19,7 +17,7 @@ export const navigationItems: NavigationItem[] = [
   {
     label: "Dashboard",
     href: "/dashboard",
-    icon: LayoutDashboard,
+    icon: LayoutGrid,
   },
   {
     label: "Tasks",
@@ -29,17 +27,7 @@ export const navigationItems: NavigationItem[] = [
   {
     label: "Calendar",
     href: "/calendar",
-    icon: CalendarDays,
-  },
-  {
-    label: "Finance",
-    href: "/finance",
-    icon: Wallet,
-  },
-  {
-    label: "Clients",
-    href: "/clients",
-    icon: Users,
+    icon: Calendar,
   },
   {
     label: "Notes",
@@ -49,6 +37,6 @@ export const navigationItems: NavigationItem[] = [
   {
     label: "Whiteboard",
     href: "/whiteboard",
-    icon: Presentation,
+    icon: MessageSquare,
   },
 ];

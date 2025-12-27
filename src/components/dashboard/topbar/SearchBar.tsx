@@ -7,16 +7,21 @@ interface SearchBarProps {
 
 export function SearchBar({ className }: SearchBarProps) {
   return (
-    <div className={cn(
-      "flex items-center gap-2.5 px-3 py-1.5 rounded-md",
-      "bg-secondary/30 hover:bg-secondary/40 transition-colors duration-150",
-      className
-    )}>
-      <Search className="h-3.5 w-3.5 text-muted-foreground/50 flex-shrink-0" strokeWidth={1.5} />
+    <div
+      className={cn(
+        "flex items-center gap-3 h-10 px-4 rounded-lg",
+        "bg-secondary/50 border border-border",
+        "text-muted-foreground",
+        "transition-colors duration-200",
+        "focus-within:bg-secondary focus-within:border-border",
+        className
+      )}
+    >
+      <Search className="h-4 w-4 flex-shrink-0" strokeWidth={1.5} />
       <input
         type="text"
         placeholder="Search"
-        className="flex-1 bg-transparent text-[13px] text-foreground/90 placeholder:text-muted-foreground/40 focus:outline-none"
+        className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
       />
     </div>
   );
